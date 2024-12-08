@@ -53,13 +53,13 @@ insert into "USER"(name,email,role) values
     -- 1. `王小明` 購買 `14 堂組合包方案`
     -- 2. `王小明` 購買 `21 堂組合包方案`
     -- 3. `好野人` 購買 `14 堂組合包方案`
-	insert into "CREDIT_PURCHASE" (user_id,credit_package_id,purchased_credits,price_paid) values
-	(
-		(select id from "USER" where email = 'richman@hexschooltest.io'),
-		(select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
-		(select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
-		(select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
-	);
+insert into "CREDIT_PURCHASE" (user_id, credit_package_id, purchased_credits, price_paid) values
+(
+  (select id from "USER" where email = 'wXlTq@hexschooltest.io'),
+  (select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+  (select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+  (select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
+);
 -- ████████  █████   █    ████   
 --   █ █   ██    █  █         ██ 
 --   █ █████ ███ ███       ███   
@@ -115,7 +115,7 @@ insert into "USER"(name,email,role) values
 -- 3-4 刪除：新增一個專長 空中瑜伽 至 SKILL 資料表，之後刪除此專長。
 	
 	insert into "SKILL" (name) values ('空中瑜伽');
-	delete from "SKILL" where name = '空中瑜伽'	
+	delete from "SKILL" where name = '空中瑜伽';	
 
 --  ████████  █████   █    █   █ 
 --    █ █   ██    █  █     █   █ 
@@ -169,7 +169,7 @@ insert into "COURSE_BOOKING"(user_id,course_id,booking_at,status)values
 	(select id  from "COURSE" where user_id = (select id from "USER" where email = 'lee2000@hexschooltest.io')),
 	'2024-11-24 16:00:00',
 	'即將授課'
-)
+);
 
 -- 5-2. 修改：`王小明`取消預約 `李燕容` 的課程，請在`COURSE_BOOKING`更新該筆預約資料：
     -- 1. 取消預約時間`cancelled_at` 設為2024-11-24 17:00:00
@@ -286,7 +286,7 @@ count (*) as 銷售數量
 from "CREDIT_PURCHASE"
 inner join "CREDIT_PACKAGE" on "CREDIT_PACKAGE".id = "CREDIT_PURCHASE".credit_package_id 
 where "CREDIT_PURCHASE".created_at >='2024-11-01 00:00:00' and "CREDIT_PURCHASE".created_at <='2024-12-30 23:59:59'
-group by "CREDIT_PACKAGE".name
+group by "CREDIT_PACKAGE".name;
 
 -- 6-4. 查詢：計算 11 月份總營收（使用 purchase_at 欄位統計）
 -- 顯示須包含以下欄位： 總營收
@@ -299,4 +299,4 @@ select count(distinct("COURSE_BOOKING".user_id)) as 預約課程的會員人數
 from "COURSE_BOOKING"
 where "COURSE_BOOKING".booking_at >='2024-11-01 00:00:00' 
 and"COURSE_BOOKING".booking_at <='2024-11-30 23:59:59'
-and "COURSE_BOOKING".status != '課程已取消'
+and "COURSE_BOOKING".status != '課程已取消';
