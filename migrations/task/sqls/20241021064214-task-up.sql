@@ -299,4 +299,4 @@ select count(distinct("COURSE_BOOKING".user_id)) as 預約課程的會員人數
 from "COURSE_BOOKING"
 where "COURSE_BOOKING".booking_at >='2024-11-01 00:00:00' 
 and"COURSE_BOOKING".booking_at <='2024-11-30 23:59:59'
-and "COURSE_BOOKING".status != '課程已取消'
+and "COURSE_BOOKING".status != '課程已取消';
